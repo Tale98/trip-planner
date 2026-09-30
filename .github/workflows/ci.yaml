@@ -1,0 +1,20 @@
+name: CI
+on:
+  push:
+    branches: ["main"]
+jobs:
+  test-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Run Docker Containers
+        run: docker compose up -d
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - name: Install dependencies
+        run: pip install -r backend/requirements.dev.txt
+      - name: Run Tests
+        run: |
+          cd backend
+          python -m pytest
