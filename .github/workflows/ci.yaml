@@ -5,6 +5,12 @@ on:
 jobs:
   test-backend:
     runs-on: ubuntu-latest
+    env:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      JWT_KEY: VERY_LONG_LONG_KEY_FOR_SECURITY
+      TOKEN_LIFETIME_SECONDS: 86400
     steps:
       - uses: actions/checkout@v6
       - name: Run Docker Containers
