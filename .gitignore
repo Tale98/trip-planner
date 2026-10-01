@@ -3,3 +3,6 @@
 /**/.venv/
 .env
 postgres-data/
+
+# System Files
+.DS_Store/
