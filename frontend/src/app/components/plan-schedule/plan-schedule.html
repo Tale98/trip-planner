@@ -1,0 +1,7 @@
+<mat-stepper orientation="vertical">
+    @for (plan of plans(); track $index){
+    <mat-step>
+        <ng-template matStepLabel>{{plan.lat}}, {{plan.lng}}</ng-template>
+    </mat-step>
+    }
+</mat-stepper>
