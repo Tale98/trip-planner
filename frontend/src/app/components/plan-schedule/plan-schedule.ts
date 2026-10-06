@@ -1,18 +1,22 @@
 import { Component, signal } from '@angular/core';
-import { MatStepperModule } from '@angular/material/stepper';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
   selector: 'app-plan-schedule',
   imports: [
-    MatStepperModule
+    MatExpansionModule
   ],
   templateUrl: './plan-schedule.html',
   styleUrl: './plan-schedule.css',
 })
 export class PlanSchedule {
     readonly plans = signal<google.maps.LatLngLiteral[]>([]);
-    addplan(value: google.maps.LatLngLiteral){
+    activePlan = signal<google.maps.LatLngLiteral | null>(null);
+    addPlan(value: google.maps.LatLngLiteral){
         this.plans.update((pre) => [...pre,value])
-        console.log(this.plans())
+            this.activePlan.set(value)
+    }
+    setActivePlan(value: google.maps.LatLngLiteral){
+        this.activePlan.set(value)
     }
 }

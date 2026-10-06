@@ -16,6 +16,6 @@ export class App {
   protected readonly title = signal('frontend');
   @ViewChild(PlanSchedule) planSchedule!: PlanSchedule;
   addPlan(plan:google.maps.LatLngLiteral){
-    this.planSchedule.addplan(plan)
+    this.planSchedule.addPlan(plan)
   }
 }

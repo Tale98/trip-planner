@@ -1,7 +1,8 @@
-<mat-stepper orientation="vertical">
-    @for (plan of plans(); track $index){
-    <mat-step>
-        <ng-template matStepLabel>{{plan.lat}}, {{plan.lng}}</ng-template>
-    </mat-step>
-    }
-</mat-stepper>
+@for (plan of plans(); track $index){
+<mat-expansion-panel [expanded]="activePlan() === plan" (afterExpand)="setActivePlan(plan)">
+    <mat-expansion-panel-header>
+        <mat-panel-title>Location Sequence : {{$index+1}}</mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>{{plan.lat}}, {{plan.lng}}</p>
+</mat-expansion-panel>
+}
