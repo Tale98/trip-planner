@@ -1,6 +1,9 @@
 from utils.auth import hash_password, verify_password
 import logging
 import httpx2
+from dependencies.database import engine
+from sqlmodel import select, Session
+from models.users import User
 log = logging.getLogger(__name__)
 def test_hash_password():
     log.info("Hash password")
@@ -36,7 +39,21 @@ def test_auth():
     })
     log.info(f"Recieved response: {response.json}")
     assert response.status_code == 400
-    log.info("test correct password")
+    log.info("test correct password without activate")
+    response = httpx2.post("http://localhost:8000/auth/login", json={
+        "username": username,
+        "password": password
+    })
+    log.info(f"Recieved response: {response.json}")
+    assert response.status_code == 401
+    log.info(f"Activate user")
+    with Session(engine) as session:
+        user = session.exec(select(User).where(User.username == username)).first()
+        user.is_active = True
+        session.add(user)
+        session.commit()
+        session.refresh(user)
+    log.info("test correct password activated user")
     response = httpx2.post("http://localhost:8000/auth/login", json={
         "username": username,
         "password": password

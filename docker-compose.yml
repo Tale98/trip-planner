@@ -8,6 +8,8 @@ services:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@database:5432/${POSTGRES_DB}
       JWT_KEY: ${JWT_KEY}
       TOKEN_LIFETIME_SECONDS: ${TOKEN_LIFETIME_SECONDS}
+      BROWSER_KEY: ${BROWSER_KEY}
+      SERVER_KEY: ${SERVER_KEY}
     ports:
       - "8000:8000"
     volumes:

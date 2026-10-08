@@ -1,11 +1,15 @@
+import { NgClass } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-plan-schedule',
   imports: [
-    MatExpansionModule
-  ],
+    MatExpansionModule,
+    MatIconModule,
+    NgClass
+],
   templateUrl: './plan-schedule.html',
   styleUrl: './plan-schedule.css',
 })

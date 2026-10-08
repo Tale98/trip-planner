@@ -1,0 +1,18 @@
+<div class="element-primary h-screen">
+    <div class="font-bold p-3 flex flex-row gap-3 text-blue-900 text-xl">
+        <mat-icon fontSet="material-symbols-outlined">trip</mat-icon>
+        <h1 class="">Trip Planner</h1>
+    </div>
+    <div class="grid grid-cols-7 grid-rows-3 md:grid-rows-2 w-full gap-3 p-3 h-200">
+        <div class="col-span-7 row-span-1 md:col-span-4 md:row-span-1 rounded-2xl p-3 border border-zinc-100 shadow-sm">
+            <app-google-map-component (markerClicked)="addPlan($event)"></app-google-map-component>
+        </div>
+        <div
+            class="col-span-7 row-span-1 md:col-span-3 md:row-span-2 rounded-2xl overflow-auto p-3 border border-zinc-100 shadow-sm">
+            <app-plan-schedule></app-plan-schedule>
+        </div>
+        <div class="col-span-7 rounded-2xl row-span-1 md:col-span-4 md:row-span-1 border border-zinc-100 shadow-sm">
+            <app-plan-list></app-plan-list>
+        </div>
+    </div>
+</div>

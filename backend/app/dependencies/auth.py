@@ -13,6 +13,8 @@ def get_current_user(session:SessionDep, access_token: Annotated[str | None, Coo
     user_exists = session.exec(select(User).where(User.id == int(decoded_payload["id"]))).first()
     if not user_exists:
         raise HTTPException(status_code=401, detail="Invalid token from query")
+    if not user_exists.is_active:
+        raise HTTPException(status_code=401, detail="User is not activated")
     return user_exists
     
 CurrentUserDep = Annotated[User, Depends(get_current_user)]

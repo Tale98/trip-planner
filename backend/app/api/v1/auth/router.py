@@ -4,6 +4,7 @@ from dependencies.database import get_session, SessionDep
 from dependencies.auth import CurrentUserDep
 from models.users import User
 from utils.auth import hash_password, verify_password, jwt_encode, TOKEN_LIFETIME_SECONDS
+from utils.key import BROWSER_KEY
 from sqlmodel import select
 router = APIRouter(
     prefix="/auth",
@@ -42,6 +43,8 @@ def login(user:UserLogin,session:SessionDep, response: Response):
     ## verify password ##
     if not verify_password(user.password, user_exists.hashed_password):
         raise HTTPException(status_code=400, detail="username or password incorrect")
+    if not user_exists.is_active:
+        raise HTTPException(status_code=401, detail="User is not activated")
     ## generate token ##
     token = jwt_encode({"id": user_exists.id})
     ## set jwt cookie ##
@@ -68,4 +71,9 @@ def logout(response: Response):
     response.delete_cookie("access_token")
     return {
         "message": "User logged out successfully"
+    }
+@router.get('browser-key')
+def get_browser_key(user: CurrentUserDep):
+    return {
+        "key": BROWSER_KEY
     }

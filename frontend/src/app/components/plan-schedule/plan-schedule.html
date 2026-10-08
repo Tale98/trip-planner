@@ -1,8 +1,19 @@
 @for (plan of plans(); track $index){
 <mat-expansion-panel [expanded]="activePlan() === plan" (afterExpand)="setActivePlan(plan)">
     <mat-expansion-panel-header>
-        <mat-panel-title>Location Sequence : {{$index+1}}</mat-panel-title>
+        <mat-panel-title>
+            <div class="flex flex-row gap-3 font-bold text-blue-800"
+                [ngClass]="{'animate-[pulse_1s_ease-in-out_infinite]': activePlan() === plan}">
+                @if(activePlan() === plan){
+                <mat-icon>radio_button_checked</mat-icon>
+                }
+                @else {
+                <mat-icon>radio_button_unchecked</mat-icon>
+                }
+                <h1>Location Sequence : {{$index+1}}</h1>
+            </div>
+        </mat-panel-title>
     </mat-expansion-panel-header>
-    <p>{{plan.lat}}, {{plan.lng}}</p>
+    <p class="text-blue-800">{{plan.lat}}, {{plan.lng}}</p>
 </mat-expansion-panel>
 }
