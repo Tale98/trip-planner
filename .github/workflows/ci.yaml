@@ -30,4 +30,5 @@ jobs:
           cd backend
           python -m pytest
       - name: Check containers logs
+        if: failure()
         run: docker compose logs backend database
