@@ -29,3 +29,5 @@ jobs:
         run: |
           cd backend
           python -m pytest
+      - name: Check containers logs
+        run: docker compose logs backend database
