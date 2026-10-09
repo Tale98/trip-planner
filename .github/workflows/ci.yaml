@@ -9,7 +9,7 @@ jobs:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-      DATABASE_URL: postgresql://postgres:password@localhost:5432/postgres
+      DATABASE_URL: postgresql+psycopg://postgres:password@localhost:5432/postgres
 
       JWT_KEY: VERY_LONG_LONG_KEY_FOR_SECURITY
       TOKEN_LIFETIME_SECONDS: 86400
@@ -22,7 +22,7 @@ jobs:
         run: docker compose up -d
       - uses: actions/setup-python@v7
         with:
-          python-version: "3.13"
+          python-version: "3.12"
       - name: Install dependencies
         run: pip install -r backend/requirements.dev.txt
       - name: Run Tests
