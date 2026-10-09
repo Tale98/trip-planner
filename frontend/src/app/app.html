@@ -1,1 +1,27 @@
 <router-outlet />
+<div class="fixed bottom-4 right-4">
+    @for (toast of toastService.toasts(); track toast.id) {
+    <div [ngClass]="{
+        'text-green-600 bg-green-200 shadow shadow-green-300': toast.type === 'success',
+        'text-orange-600 bg-orange-200 shadow shadow-orange-300': toast.type === 'warning',
+        'text-red-600 bg-red-200 shadow shadow-red-300': toast.type === 'error',
+      }" class="relative p-3 rounded-2xl w-64 m-3 animate-pulse hover:animate-none">
+        <div class="flex flex-row gap-2 text-lg font-bold">
+            @if (toast.type === 'success') {
+            <mat-icon>check_circle</mat-icon>
+            }
+            @else if (toast.type === 'warning') {
+            <mat-icon>warning</mat-icon>
+            }
+            @else if (toast.type === 'error') {
+            <mat-icon>error</mat-icon>
+            }
+            <h1 class="">{{ toast.title }}</h1>
+        </div>
+        <h1 class="mt-3 ml-3 text-sm text-slate-800">{{ toast.description }}</h1>
+        <button class="absolute right-1 top-1 text-white hover:text-black" (click)="dissmissToast(toast.id)">
+            <mat-icon class="text-sm">close</mat-icon>
+        </button>
+    </div>
+    }
+</div>

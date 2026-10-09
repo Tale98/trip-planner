@@ -1,7 +1,7 @@
 import { Component, EventEmitter, inject, Output, signal, viewChild } from '@angular/core';
 import { GoogleMap, MapAdvancedMarker } from '@angular/google-maps';
 import { MatDialog } from '@angular/material/dialog';
-import { LocationAddDialog } from '../../location-add-dialog/location-add-dialog';
+import { LocationAddDialog } from '../location-add-dialog/location-add-dialog';
 @Component({
   selector: 'app-google-map-component',
   imports: [GoogleMap, MapAdvancedMarker],
