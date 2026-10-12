@@ -24,10 +24,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.css",
-              "src/marterial-theme.scss"
-            ]
+            "styles": ["src/styles.css", "src/marterial-theme.scss"]
           },
           "configurations": {
             "production": {

@@ -2,8 +2,10 @@
 
 html {
   color-scheme: light;
-  @include mat.theme((
-    color: mat.$azure-palette,
-    typography: Inter,
-  ));
+  @include mat.theme(
+    (
+      color: mat.$azure-palette,
+      typography: Inter,
+    )
+  );
 }

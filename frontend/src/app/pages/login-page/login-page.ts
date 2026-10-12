@@ -3,13 +3,13 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth-service';
 import { ToastService } from '../../services/toast-service';
 
 @Component({
   selector: 'app-login-page',
-  imports: [MatIconModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
+  imports: [MatIconModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterLink],
   templateUrl: './login-page.html',
   styleUrl: './login-page.css',
 })
@@ -30,7 +30,7 @@ export class LoginPage {
       .subscribe({
         next: (res) => {
           console.log(res.message);
-          this.toastSercice.show('success', 'Login Failed', res.message);
+          this.toastSercice.show('success', 'Login Success', res.message);
           this.router.navigate(['/']);
         },
         error: (error) => {

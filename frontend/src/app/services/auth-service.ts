@@ -1,7 +1,13 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
-import { LoginRequest, LoginResponse, LogoutResponse } from '../models/auth';
+import {
+  LoginRequest,
+  LoginResponse,
+  LogoutResponse,
+  RegisterRequest,
+  RegisterResponse,
+} from '../models/auth';
 import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
@@ -17,5 +23,8 @@ export class AuthService {
   }
   logout(): Observable<LogoutResponse> {
     return this.http.get<LogoutResponse>(`${this.BASE_URL}/auth/logout`);
+  }
+  register(request: RegisterRequest): Observable<RegisterResponse> {
+    return this.http.post<RegisterResponse>(`${this.BASE_URL}/auth/register`, request);
   }
 }

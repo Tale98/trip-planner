@@ -1,19 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import "tailwindcss";
-@import "material-icons/iconfont/material-icons.css";
+@import 'tailwindcss';
+@import 'material-icons/iconfont/material-icons.css';
 @import 'material-symbols';
 @theme {
-  --color-primary: #FF7A23;
-  --color-primary-light: #FFCBA4;
-  --color-primary-dark: #CC6219;
-  --color-secondary: #3696A1;
-  --color-secondary-light: #86D9E7;
-  --color-secondary-dark: #2A7580;
-  --color-text: #0A0A0A;
-  --color-text-light: #4A4A4A;
-  --color-bg: #F9F9F9;
-  --color-bg-light: #FFFFFF;
+  --color-primary: #ff7a23;
+  --color-primary-light: #ffcba4;
+  --color-primary-dark: #cc6219;
+  --color-secondary: #3696a1;
+  --color-secondary-light: #86d9e7;
+  --color-secondary-dark: #2a7580;
+  --color-text: #0a0a0a;
+  --color-text-light: #4a4a4a;
+  --color-bg: #f9f9f9;
+  --color-bg-light: #ffffff;
   --font-display: 'Inter', sans-serif;
   --font-body: 'Inter', sans-serif;
 }
