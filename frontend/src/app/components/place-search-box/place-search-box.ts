@@ -13,7 +13,9 @@ import {
   PlaceDetailData,
 } from '../../models/place';
 import { PlaceService } from '../../services/place-service';
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TruncatePipe } from '../../pipes/truncate-pipe';
 @Component({
   selector: 'app-place-search-box',
   imports: [
@@ -23,6 +25,9 @@ import { PlaceService } from '../../services/place-service';
     MatAutocompleteModule,
     ReactiveFormsModule,
     AsyncPipe,
+    MatIconModule,
+    MatTooltipModule,
+    TruncatePipe,
   ],
   templateUrl: './place-search-box.html',
   styleUrl: './place-search-box.css',

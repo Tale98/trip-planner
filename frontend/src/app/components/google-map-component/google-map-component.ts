@@ -12,7 +12,7 @@ import {
 import { GoogleMap, MapAdvancedMarker } from '@angular/google-maps';
 import { MatDialog } from '@angular/material/dialog';
 import { LocationAddDialog } from '../location-add-dialog/location-add-dialog';
-import { LatLng } from '../../models/place';
+import { Bounds, LatLng } from '../../models/place';
 @Component({
   selector: 'app-google-map-component',
   imports: [GoogleMap, MapAdvancedMarker],
@@ -24,15 +24,24 @@ export class GoogleMapComponent {
     zoom: 10,
     mapId: 'DEMO_MAP_ID',
   };
-  panTo = input<LatLng | null>(null);
+  fitBounds = input<Bounds | null>(null);
   center: google.maps.LatLngLiteral = { lat: 13.7563, lng: 100.5018 };
   constructor() {
     effect(() => {
-      const center = this.panTo();
-      if (!center) {
+      const bounds = this.fitBounds();
+      if (!bounds) {
         return;
       }
-      this.map().panTo({ lat: center.latitude, lng: center.longitude });
+      console.log(bounds);
+      this.map().fitBounds(
+        {
+          east: bounds.east,
+          west: bounds.west,
+          north: bounds.north,
+          south: bounds.south,
+        },
+        20,
+      );
     });
   }
   @Output() markerClicked = new EventEmitter<google.maps.LatLngLiteral>();

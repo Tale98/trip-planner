@@ -8,7 +8,7 @@ import { AuthService } from '../../services/auth-service';
 import { Router } from '@angular/router';
 import { ToastService } from '../../services/toast-service';
 import { PlaceSearchBox } from '../../components/place-search-box/place-search-box';
-import { LatLng, PlaceDetailData } from '../../models/place';
+import { Bounds, LatLng, PlaceDetailData } from '../../models/place';
 
 @Component({
   selector: 'app-main-page',
@@ -35,8 +35,8 @@ export class MainPage {
     });
     this.router.navigate(['/login']);
   }
-  center = signal<LatLng | null>(null);
+  bounds = signal<Bounds | null>(null);
   onPlaceSelected(details: PlaceDetailData) {
-    this.center.set(details.location);
+    this.bounds.set(details.bounds);
   }
 }
