@@ -39,7 +39,6 @@ async def auto_complete(request: AutoCompleteRequest):
         )
     except GoogleAPICallError:
         raise HTTPException(HTTPStatus.BAD_GATEWAY, "Google API Service Error")
-    res.suggestions[0]
     return AutoCompleteResponse(
         suggests=[ 
             AutoCompleteSearchResult(place_id=suggest.place_prediction.place_id, text=suggest.place_prediction.text.text) for suggest in res.suggestions
