@@ -1,4 +1,4 @@
-import { Component, inject, output } from '@angular/core';
+import { Component, effect, inject, input, output, signal } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -10,6 +10,7 @@ import {
   AutoCompleteSearchRequest,
   AutoCompleteSearchResult,
   GetPlaceDetailRequest,
+  LatLng,
   PlaceDetailData,
 } from '../../models/place';
 import { PlaceService } from '../../services/place-service';
@@ -36,6 +37,7 @@ export class PlaceSearchBox {
   formComtrol = new FormControl<string | AutoCompleteSearchResult>('');
   sessionToken: string = crypto.randomUUID();
   placeService = inject(PlaceService);
+  center = input<LatLng | null>(null);
   results$ = this.formComtrol.valueChanges.pipe(
     filter((value): value is string => typeof value === 'string'),
     debounceTime(300),
@@ -50,6 +52,8 @@ export class PlaceSearchBox {
       const request: AutoCompleteSearchRequest = {
         session_token: this.sessionToken,
         text: text,
+        center: this.center(),
+        radius: 50000,
       };
       return this.placeService.autoCompleteSearch(request).pipe(
         map((res) => res.suggests),

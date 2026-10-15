@@ -6,6 +6,9 @@ from fastapi import APIRouter, HTTPException
 from google.maps.places_v1.types import Circle
 from google.type import latlng_pb2
 from dependencies.places import client
+DEFAULT_CENTER = LatLng(latitude=13.7563, longitude=100.5018)
+DEFAULT_RADIUS = 50000.0
+
 router = APIRouter(
     prefix="/place",
     tags=["Place"]
@@ -18,15 +21,19 @@ def test():
     }
 @router.post('/auto-complete', response_model=AutoCompleteResponse)
 async def auto_complete(request: AutoCompleteRequest):
+    if request.center is None:
+        request.center = DEFAULT_CENTER
+    if request.radius is None:
+        request.radius = DEFAULT_RADIUS
     try:
-        center = latlng_pb2.LatLng(latitude=13.7563, longitude=100.5018)
+        center = latlng_pb2.LatLng(latitude=request.center.latitude, longitude=request.center.longitude)
         res = await client.autocomplete_places(
             request=AutocompletePlacesRequest(
             input=request.text,
             session_token=request.session_token,
             language_code="th",
             location_bias=AutocompletePlacesRequest.LocationBias(
-                circle = Circle(center=center, radius=50000)),
+                circle = Circle(center=center, radius=request.radius)),
             origin=center
             )
         )

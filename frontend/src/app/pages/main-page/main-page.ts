@@ -35,8 +35,13 @@ export class MainPage {
     });
     this.router.navigate(['/login']);
   }
+  center: LatLng | null = null;
   bounds = signal<Bounds | null>(null);
   onPlaceSelected(details: PlaceDetailData) {
     this.bounds.set(details.bounds);
+  }
+  onCenterChanged(event: LatLng) {
+    this.center = event;
+    console.log(event);
   }
 }
