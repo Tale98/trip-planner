@@ -1,10 +1,14 @@
 from typing_extensions import Annotated
 from typing_extensions import List
-from pydantic import BaseModel
-
+from pydantic import BaseModel, Field
+class LatLng(BaseModel):
+    latitude: float
+    longitude: float
 class AutoCompleteRequest(BaseModel):
     text: str
     session_token: str
+    center: LatLng | None = None
+    radius: float | None = Field(default=None, gt=0, le=50000)
 class AutoCompleteSearchResult(BaseModel):
     place_id: str
     text: str
@@ -17,9 +21,6 @@ class GetPlaceDetailRequest(BaseModel):
 class DisplayName(BaseModel):
     text: str
     language_code: str
-class LatLng(BaseModel):
-    latitude: float
-    longitude: float
 class Bounds(BaseModel):
     north: float
     east: float

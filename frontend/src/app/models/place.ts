@@ -5,6 +5,8 @@ export interface AutoCompleteSearchResult {
 export interface AutoCompleteSearchRequest {
   text: string;
   session_token: string;
+  center: LatLng | null;
+  radius: number | null;
 }
 export interface AutoCompleteSearchResponse {
   suggests: AutoCompleteSearchResult[];

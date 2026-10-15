@@ -5,6 +5,7 @@ import {
   EventEmitter,
   inject,
   input,
+  output,
   Output,
   signal,
   viewChild,
@@ -23,16 +24,15 @@ export class GoogleMapComponent {
   options: google.maps.MapOptions = {
     zoom: 10,
     mapId: 'DEMO_MAP_ID',
+    center: { lat: 13.7563, lng: 100.5018 },
   };
   fitBounds = input<Bounds | null>(null);
-  center: google.maps.LatLngLiteral = { lat: 13.7563, lng: 100.5018 };
   constructor() {
     effect(() => {
       const bounds = this.fitBounds();
       if (!bounds) {
         return;
       }
-      console.log(bounds);
       this.map().fitBounds(
         {
           east: bounds.east,
@@ -48,4 +48,15 @@ export class GoogleMapComponent {
   map = viewChild.required(GoogleMap);
   onMapClick(event: google.maps.MapMouseEvent | google.maps.IconMouseEvent) {}
   readonly dialog = inject(MatDialog);
+  centerChanged = output<LatLng>();
+  onIdle() {
+    const center = this.map().getCenter();
+    if (!center) {
+      return;
+    }
+    this.centerChanged.emit({
+      latitude: center.lat(),
+      longitude: center.lng(),
+    });
+  }
 }
