@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, signal, viewChild, ViewChild } from '@angular/core';
 import { GoogleMapComponent } from '../../components/google-map-component/google-map-component';
 import { PlanList } from '../../components/plan-list/plan-list';
 import { PlanSchedule } from '../../components/plan-schedule/plan-schedule';
@@ -7,10 +7,12 @@ import { MatSnackBarLabel } from '@angular/material/snack-bar';
 import { AuthService } from '../../services/auth-service';
 import { Router } from '@angular/router';
 import { ToastService } from '../../services/toast-service';
+import { PlaceSearchBox } from '../../components/place-search-box/place-search-box';
+import { Bounds, LatLng, PlaceDetailData } from '../../models/place';
 
 @Component({
   selector: 'app-main-page',
-  imports: [GoogleMapComponent, PlanList, PlanSchedule, MatIconModule, MatSnackBarLabel],
+  imports: [GoogleMapComponent, PlanList, PlanSchedule, MatIconModule, PlaceSearchBox],
   templateUrl: './main-page.html',
   styleUrl: './main-page.css',
 })
@@ -32,5 +34,9 @@ export class MainPage {
       },
     });
     this.router.navigate(['/login']);
+  }
+  bounds = signal<Bounds | null>(null);
+  onPlaceSelected(details: PlaceDetailData) {
+    this.bounds.set(details.bounds);
   }
 }

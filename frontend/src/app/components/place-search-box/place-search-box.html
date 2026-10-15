@@ -1,0 +1,14 @@
+<mat-form-field class="w-full">
+    <mat-label>Search Places</mat-label>
+    <input type="text" matInput [matAutocomplete]="auto" [formControl]="formComtrol">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelect($event.option.value)" [displayWith]="display">
+        @for(result of results$ | async; track result.place_id){
+        <mat-option [value]="result" [matTooltip]="result.text" matTooltipPosition="right">
+            <mat-icon class="shrink-0">place</mat-icon>
+            <div class="flex items-center gap-2 min-w-0">
+                <span class="text-sm truncate">{{ result.text | truncate : 24}}</span>
+            </div>
+        </mat-option>
+        }
+    </mat-autocomplete>
+</mat-form-field>

@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from dependencies.database import create_all_tables, SessionDep
 from api.v1.auth.router import router as auth_router
+from api.v1.place.router import router as place_router
 from fastapi.middleware.cors import CORSMiddleware
 @asynccontextmanager
 async def lifespan(app:FastAPI):
@@ -12,7 +13,7 @@ async def lifespan(app:FastAPI):
     ## after closing
 app = FastAPI(lifespan=lifespan)
 app.include_router(auth_router)
-
+app.include_router(place_router)
 origins = [
     "http://localhost:4200",
 ]
