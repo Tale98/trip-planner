@@ -1,0 +1,9 @@
+<mat-form-field>
+    <mat-label>Search Places</mat-label>
+    <input type="text" matInput [matAutocomplete]="auto" [formControl]="formComtrol">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelect($event.option.value)" [displayWith]="display">
+        @for(result of results$ | async; track result.place_id){
+        <mat-option [value]="result">{{result.text}}</mat-option>
+        }
+    </mat-autocomplete>
+</mat-form-field>
